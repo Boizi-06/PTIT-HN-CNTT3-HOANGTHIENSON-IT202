@@ -1,51 +1,50 @@
-create database mini_project_ss04;
-use mini_project_ss04;
+CREATE DATABASE mini_project_ss04;
+USE mini_project_ss04;
 
-
-create table teacher (
-    teacher_id int primary key auto_increment,
-    teacher_name varchar(100) not null,
-    teacher_email varchar(100) not null unique
+-- Teacher
+CREATE TABLE teacher (
+    teacher_id INT PRIMARY KEY AUTO_INCREMENT,
+    teacher_name VARCHAR(100) NOT NULL,
+    teacher_email VARCHAR(100) NOT NULL UNIQUE
 );
 
-
-create table students (
-    student_id int primary key auto_increment,
-    student_name varchar(100) not null,
-    email varchar(100) not null unique,
-    date_of_birth date
+-- Student
+CREATE TABLE students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    date_of_birth DATE
 );
 
-
-create table subjects (
-    subject_id int primary key auto_increment,
-    subject_name varchar(100) not null,
-    sub_description text,
-    credit int not null check(credit >0),
-    teacher_id int not null,
-    foreign key (teacher_id) references teacher(teacher_id)
+-- Course
+CREATE TABLE subjects (
+    subject_id INT PRIMARY KEY AUTO_INCREMENT,
+    subject_name VARCHAR(100) NOT NULL,
+    sub_description TEXT,
+    total_sessions INT NOT NULL CHECK (total_sessions > 0),
+    teacher_id INT NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
 );
 
-
-create table enrollment (
-    student_id int,
-    subject_id int,
-    regist_date datetime default current_timestamp,
-    primary key (student_id, subject_id),
-    foreign key (student_id) references students(student_id),
-    foreign key (subject_id) references subjects(subject_id)
+-- Enrollment
+CREATE TABLE enrollment (
+    student_id INT,
+    subject_id INT,
+    regist_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (student_id, subject_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
 );
 
-
-create table score (
-    student_id int,
-    subject_id int,
-    mid_score float check (mid_score >=0 and mid_score <= 10),
-    final_score float check (final_score >=0 and final_score <= 10),
-    primary key (student_id, subject_id),
-    foreign key (student_id) references students(student_id),
-    foreign key (subject_id) references subjects(subject_id)
+-- Score
+CREATE TABLE score (
+    student_id INT,
+    subject_id INT,
+    mid_score DECIMAL(4,2) CHECK (mid_score BETWEEN 0 AND 10),
+    final_score DECIMAL(4,2) CHECK (final_score BETWEEN 0 AND 10),
+    PRIMARY KEY (student_id, subject_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
 );
-
 
 

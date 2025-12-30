@@ -2,9 +2,9 @@
 CREATE DATABASE session04_exam;
 USE session04_exam;
 
--- ======================
+
 -- Bảng Student
--- ======================
+
 CREATE TABLE student (
     student_id INT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -12,18 +12,17 @@ CREATE TABLE student (
     phone VARCHAR(15)
 );
 
--- ======================
 -- Bảng Course
--- ======================
+
 CREATE TABLE course (
     course_id INT PRIMARY KEY,
     course_name VARCHAR(100) NOT NULL,
     credit INT NOT NULL CHECK (credit > 0)
 );
 
--- ======================
+
 -- Bảng Enrollment
--- ======================
+
 CREATE TABLE enrollment (
     student_id INT,
     course_id INT,

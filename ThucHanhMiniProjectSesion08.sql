@@ -98,18 +98,20 @@ LEFT JOIN bookings b ON g.guest_id = b.guest_id
 GROUP BY g.guest_id, g.guest_name;
 
 
-SELECT r.room_id ,
-       SUM(DATEDIFF(b.check_out, b.check_in) * r.price_per_day) AS DoanhThu
+SELECT r.room_id,
+       SUM((b.check_out - b.check_in) * r.price_per_day) AS doanhThu
 FROM bookings b
 JOIN rooms r ON b.room_id = r.room_id
 GROUP BY r.room_id;
 
 
-SELECT r.room_type,
-       SUM(DATEDIFF(b.check_out, b.check_in) * r.price_per_day) AS TongDoanhThu
+
+SELECTSELECT r.room_type,
+       SUM((b.check_out - b.check_in) * r.price_per_day) AS tong_DoanhThu
 FROM bookings b
 JOIN rooms r ON b.room_id = r.room_id
 GROUP BY r.room_type;
+
 
 
 

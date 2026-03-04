@@ -1,4 +1,4 @@
-create database ss13_Bai1;
+create database ss13_Bai
 use ss13_Bai1;
 create table users (
     user_id int auto_increment primary key,
